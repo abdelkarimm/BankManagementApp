@@ -19,19 +19,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private DataSource dataSource;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/*
-		 * auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().
-		 * encode("admin")).roles("ADMIN","USER");
-		 * auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().
-		 * encode("user")).roles("USER");
-		 */
 		
-		auth.jdbcAuthentication()
-		.dataSource(dataSource)
-	 	.usersByUsernameQuery("select username as principal, password as credentials, active from users where username =?")
-		.authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username =?")
-		.passwordEncoder(passwordEncoder())
-		.rolePrefix("ROLE_");
+		  auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().
+		  encode("admin")).roles("ADMIN","USER");
+		  auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().
+		  encode("user")).roles("USER");
+		 
+		
+//		auth.jdbcAuthentication()
+//		.dataSource(dataSource)
+//	 	.usersByUsernameQuery("select username as principal, password as credentials, active from users where username =?")
+//		.authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username =?")
+//		.passwordEncoder(passwordEncoder())
+//		.rolePrefix("ROLE_");
 		//.passwordEncoder(new M)
 	}
 	
