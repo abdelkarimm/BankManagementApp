@@ -13,6 +13,6 @@ public interface IBanqueMetier {
 	public void verser(String codeCpte, double montant);
 	public void retirer(String codeCpte, double montant);
 	public Page<Operation> listOperation(String codeCpte,int page,int size);
-	 public List<Operation> listAll();
+	public List<Operation> listAll();
 
 }
