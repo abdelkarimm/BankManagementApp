@@ -3,7 +3,6 @@ package com.ikhaa.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -25,9 +24,9 @@ public  class  Compte implements Serializable {
 	private Client client;
 	@OneToMany(mappedBy="compte")
 	private Collection<Operation> operations;
+	
 	public Compte() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Compte(String codeCompte, Date dateCreation, double solde, Client client) {
 		super();
