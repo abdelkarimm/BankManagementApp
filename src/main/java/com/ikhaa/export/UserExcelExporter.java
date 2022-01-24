@@ -3,35 +3,31 @@ package com.ikhaa.export;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
- 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
- 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import com.ikhaa.entities.Operation;
  
 public class UserExcelExporter {
+ 
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private List<Operation> listOperations;
-     
+  
     public UserExcelExporter(List<Operation> listOperations) {
         this.listOperations = listOperations;
         workbook = new XSSFWorkbook();
     }
  
- 
     private void writeHeaderLine() {
+     
         sheet = workbook.createSheet("Operations");
-         
         Row row = sheet.createRow(0);
-         
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
@@ -41,13 +37,14 @@ public class UserExcelExporter {
         createCell(row, 0, "Operation Num", style);      
         createCell(row, 1, "Type", style);       
         createCell(row, 2, "Date", style);    
-        createCell(row, 3, "Montant", style);
-           
+        createCell(row, 3, "Montant", style);      
     }
      
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
+     
         sheet.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
+     
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
         } if (value instanceof Double) {
@@ -65,8 +62,9 @@ public class UserExcelExporter {
     }
      
     private void writeDataLines() {
+     
         int rowCount = 1;
- 
+     
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
@@ -77,24 +75,21 @@ public class UserExcelExporter {
             int columnCount = 0;
              
             createCell(row, columnCount++, operation.getNumero(), style);
-           createCell(row, columnCount++, operation.getClass().getSimpleName(), style);
-         //   createCell(row, columnCount++, operation.class.simpleName, style);
-
+            createCell(row, columnCount++, operation.getClass().getSimpleName(), style);
             createCell(row, columnCount++, operation.getDateOperation(), style);
-            createCell(row, columnCount++, operation.getMontant(), style);
-       
-             
+            createCell(row, columnCount++, operation.getMontant(), style);  
         }
     }
      
     public void export(HttpServletResponse response) throws IOException {
+     
         writeHeaderLine();
         writeDataLines();
-         
+     
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
+     
         workbook.close();
-         
         outputStream.close();
          
     }
