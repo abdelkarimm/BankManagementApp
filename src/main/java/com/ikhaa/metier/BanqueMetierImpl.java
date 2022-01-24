@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ikhaa.dao.CompteRepository;
 import com.ikhaa.dao.OperationRepository;
-import com.ikhaa.entities.Compte;
 
+import com.ikhaa.entities.Compte;
 import com.ikhaa.entities.Operation;
 import com.ikhaa.entities.Retrait;
 import com.ikhaa.entities.Versement;
@@ -48,6 +48,7 @@ public class BanqueMetierImpl implements IBanqueMetier {
 
 	@Override
 	public void retirer(String codeCpte, double montant) {
+		
 		Compte cp=consulterCompte(codeCpte);
 	
 		if(cp.getSolde() < montant)
