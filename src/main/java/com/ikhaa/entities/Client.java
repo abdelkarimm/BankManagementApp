@@ -2,7 +2,6 @@ package com.ikhaa.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,9 +16,9 @@ public class Client implements Serializable {
 	private String email;
 	@OneToMany(mappedBy="client",fetch=FetchType.LAZY)
 	private Collection<Compte> comptes;
+	
 	public Client() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Client(String nom, String email) {
