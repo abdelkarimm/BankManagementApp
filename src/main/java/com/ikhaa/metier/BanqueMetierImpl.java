@@ -26,8 +26,10 @@ public class BanqueMetierImpl implements IBanqueMetier {
 	private CompteRepository compteRepository;
 	@Autowired
 	private OperationRepository operationRepository;
+	
 	@Override
 	public Compte consulterCompte(String codeCpte) {
+		
 		Compte cp=compteRepository.findById(codeCpte).orElse(null);
 		if(cp==null) throw new RuntimeException("Compte introuvable");
 		return cp;
@@ -35,6 +37,7 @@ public class BanqueMetierImpl implements IBanqueMetier {
 
 	@Override
 	public void verser(String codeCpte, double montant) {
+		
 		Compte cp=consulterCompte(codeCpte);
 		Versement v=new Versement(new Date(),montant,cp);
 		operationRepository.save(v);
@@ -65,8 +68,8 @@ public class BanqueMetierImpl implements IBanqueMetier {
 	
 	@Override
 	public List<Operation> listAll() {
-		// TODO Auto-generated method stub
-		 return operationRepository.findAll();
+
+		return operationRepository.findAll();
 	}
 
 }
