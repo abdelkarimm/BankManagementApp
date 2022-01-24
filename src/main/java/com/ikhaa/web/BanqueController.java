@@ -31,7 +31,6 @@ public class BanqueController {
 		return "comptes";
 	}
 	
-	
 	@RequestMapping("/consulterCompte")
 	public String consulterCompte(Model model, String codeCompte,
 			@RequestParam(name="page",defaultValue="0")int page,
